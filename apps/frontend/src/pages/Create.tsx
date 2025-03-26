@@ -20,6 +20,7 @@ export default function Create() {
         index: number;
         availableActionId: string;
         availableActionName: string;
+        metadata: any
     }[]>([]);
     const [selectedModalIndex, setSelectedModalIndex] = useState<null | number>(null);
 
@@ -37,7 +38,7 @@ export default function Create() {
                         "triggerMetadata": {},
                         "actions": selectedActions.map(a => ({
                             availableActionId: a.availableActionId,
-                            actionMetadata: {}
+                            actionMetadata: a.metadata
                         }))
                     }, {
                         headers: {
@@ -67,7 +68,8 @@ export default function Create() {
                             setSelectedActions(a => [...a, {
                                 index: a.length + 2,
                                 availableActionId: "",
-                                availableActionName: ""
+                                availableActionName: "",
+                                metadata: {}
                             }])
                         }}><div className="text-2xl">
                                 +
@@ -75,7 +77,7 @@ export default function Create() {
                     </div>
                 </div>
             </div>
-            {selectedModalIndex && <Modal availableItems={selectedModalIndex === 1 ? availableTriggers : availableActions} onSelect={(props: null | { name: string, id: string }) => {
+            {selectedModalIndex && <Modal availableItems={selectedModalIndex === 1 ? availableTriggers : availableActions} onSelect={(props: null | { name: string, id: string, metadata: any }) => {
                 if (props === null) {
                     setSelectedModalIndex(null);
                     return;
@@ -91,7 +93,8 @@ export default function Create() {
                         newActions[selectedModalIndex - 2] = {
                             index: selectedModalIndex,
                             availableActionId: props.id,
-                            availableActionName: props.name
+                            availableActionName: props.name,
+                            metadata: props.metadata
                         }
                         return newActions
                     })
