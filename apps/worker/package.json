@@ -13,6 +13,11 @@
   "description": "",
   "dependencies": {
     "@repo/db": "*",
-    "kafkajs": "^2.2.4"
+    "@solana/web3.js": "^1.98.0",
+    "@types/nodemailer": "^6.4.17",
+    "bs58": "^6.0.0",
+    "dotenv": "^16.4.7",
+    "kafkajs": "^2.2.4",
+    "nodemailer": "^6.10.0"
   }
 }
